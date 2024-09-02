@@ -1,0 +1,95 @@
+1)Add Binary
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function(a, b) {
+    let result = '';
+    let carry = 0;
+    let i = a.length - 1;
+    let j = b.length - 1;
+    
+    while (i >= 0 || j >= 0) {
+        let sum = carry;
+        
+        if (i >= 0) sum += a[i--] - '0';  // Convert char to number and add
+        if (j >= 0) sum += b[j--] - '0';  // Convert char to number and add
+        
+        result = (sum % 2) + result;  // Append the result bit
+        carry = Math.floor(sum / 2);  // Update the carry
+    }
+    
+    if (carry) result = carry + result;  // If there's a carry left, append it
+    
+    return result;
+};
+
+2)Sqrt(X)
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var mySqrt = function(x) {
+    if (x === 0 || x === 1) return x;
+
+    let left = 1;
+    let right = x;
+    let result = 0;
+    
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        
+        if (mid * mid === x) {
+            return mid; // Found the exact square root
+        } else if (mid * mid < x) {
+            left = mid + 1; // Search in the right half
+            result = mid; // Update result to the closest integer
+        } else {
+            right = mid - 1; // Search in the left half
+        }
+    }
+    
+    return result;
+};
+
+3)Climbing Stairs
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var climbStairs = function(n) {
+    if (n <= 2) return n;
+    
+    let first = 1;
+    let second = 2;
+    
+    for (let i = 3; i <= n; i++) {
+        let third = first + second;
+        first = second;
+        second = third;
+    }
+    
+    return second;
+};
+4)remove duplicates from sorted lists 
+function ListNode(val, next) {
+    this.val = (val === undefined ? 0 : val);
+    this.next = (next === undefined ? null : next);
+}
+
+var deleteDuplicates = function(head) {
+    let current = head;
+
+    while (current !== null && current.next !== null) {
+        if (current.val === current.next.val) {
+            // Skip the next node
+            current.next = current.next.next;
+        } else {
+            // Move to the next node
+            current = current.next;
+        }
+    }
+
+    return head;
+};
